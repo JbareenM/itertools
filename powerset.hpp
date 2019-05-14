@@ -28,7 +28,7 @@ namespace itertools{
                 _cur++;
                 return *this;
             }
-            const auto &operator*(){
+            auto &operator*() const{
                 std::ostringstream ostr;
                 ostr<<"";
                 return ostr.str();
@@ -38,12 +38,8 @@ namespace itertools{
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        iterator begin(){
-            return (_set.begin());
-        }
-        iterator end(){
-            return (_set.end());
-        }
+        auto begin(){return (_set.begin());}
+        auto end(){return (_set.end());}
     };
     template <typename IT>
     _powerset<IT> powerset(IT a){
