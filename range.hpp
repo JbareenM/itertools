@@ -23,7 +23,7 @@ namespace itertools{
             T _ItrCurrent;
         public:
             iterator(T itr):_ItrCurrent(itr){}
-            T &operator*() { return _ItrCurrent; }
+            T operator*() const{ return _ItrCurrent; }
             iterator &operator++(){
                 ++_ItrCurrent;
                 return *this;
