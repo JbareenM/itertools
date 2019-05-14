@@ -23,14 +23,12 @@ namespace itertools{
         //iterator_class________________________________________________________
         class iterator {
         private:
-            typename T::iterator _FirstCur;
-            typename T::iterator _EndFirst;
-            typename E::iterator _SecCur;
-            typename E::iterator _EndSec;
+            typename T::iterator _FirstCur,_EndFirst;
+            typename E::iterator _SecCur,_EndSec;
         public:
             iterator(typename T::iterator a, typename T::iterator b, typename E::iterator c,typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecCur(c),_EndSec(d){}
             
-            const auto operator*() {
+            auto operator*() const{
                 std::ostringstream ostr;
                 ostr<<*_FirstCur<<","<<*_SecCur;
                 return ostr.str();
