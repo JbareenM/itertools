@@ -30,7 +30,7 @@ namespace itertools{
         public:
             iterator(typename T::iterator a, typename T::iterator b, typename E::iterator c,typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecCur(c),_EndSec(d){}
             
-            auto operator*() {
+            const auto operator*() {
                 std::ostringstream ostr;
                 ostr<<*_FirstCur<<","<<*_SecCur;
                 return ostr.str();
@@ -53,10 +53,10 @@ namespace itertools{
             }//iterator_class________________________________________________________
             //_____________________________________________________
         };
-        iterator begin(){
+        const iterator begin(){
             return iterator(_First.begin(), _First.end(), _Second.begin(), _Second.end());
         };
-        iterator end(){
+        const iterator end(){
             return iterator(_First.end(), _First.end(), _Second.end(), _Second.end());
         }
     };

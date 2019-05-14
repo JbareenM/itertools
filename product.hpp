@@ -19,7 +19,7 @@ namespace itertools{
         T _First;
         E _Second;
     public:
-        _product(T first,E second):_First(first),_Second(second){}
+        _product(const T first,const E second):_First(first),_Second(second){}
         //iterator_class________________________________________________________
         class iterator{
         private:
@@ -27,7 +27,7 @@ namespace itertools{
             typename E::iterator _SecCur,_SecFirst,_EndSec;
         public:
             iterator(const typename T::iterator a,const typename T::iterator b,const typename E::iterator c,const typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecFirst(c),_SecCur(c),_EndSec(d){}
-            auto operator*(){
+            const auto operator*(){
                 std::ostringstream ostr;
                 ostr<<*_FirstCur<<","<<*_SecCur;
                 return ostr.str();
@@ -55,10 +55,10 @@ namespace itertools{
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        iterator begin() {
+        const iterator begin() {
             return iterator(_First.begin(), _First.end(), _Second.begin(), _Second.end());
         }
-        iterator end() {
+        const iterator end() {
             return iterator(_First.end(), _First.end(), _Second.end(), _Second.end());
         }
     };

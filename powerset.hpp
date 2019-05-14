@@ -38,8 +38,8 @@ namespace itertools{
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        auto begin(){return (_set.begin());}
-        auto end(){return (_set.end());}
+        const auto begin(){return (_set.begin());}
+        const auto end(){return (_set.end());}
     };
     template <typename IT>
     _powerset<IT> powerset(IT a){

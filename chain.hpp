@@ -17,7 +17,7 @@ namespace itertools{
         T _First;
         E _Second;
     public:
-        _chain(T first, E second) : _First(first), _Second(second){}
+        _chain(const T first,const E second) : _First(first), _Second(second){}
 
         class iterator{
         private:
@@ -50,10 +50,10 @@ namespace itertools{
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        iterator begin(){
+        const iterator begin() {
             return iterator(_First.begin(),_First.end(),_Second.begin());
         }
-        iterator end(){
+        const iterator end(){
             return iterator(_First.end(),_First.end(),_Second.end());
         }
     };

@@ -37,8 +37,8 @@ namespace itertools{
             bool operator!=(const iterator &a) const { return _ItrCurrent != a._ItrCurrent; }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        iterator begin(){return iterator(_begin);}
-        iterator end(){return iterator(_end);}
+        iterator begin() const{return iterator(_begin);}
+        iterator end() const{return iterator(_end);}
     };
     template <typename IT>
     _range<IT> range(IT begin, IT end){
