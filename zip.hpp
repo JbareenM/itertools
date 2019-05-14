@@ -9,6 +9,7 @@
 #ifndef zip_hpp
 #define zip_hpp
 #include <iostream>
+#include <sstream>
 
 namespace itertools{
     
@@ -30,8 +31,9 @@ namespace itertools{
             iterator(typename T::iterator a, typename T::iterator b, typename E::iterator c,typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecCur(c),_EndSec(d){}
             
             auto operator*() {
-                std::cout<<*_FirstCur<<","<<*_SecCur;
-                return "";
+                std::ostringstream ostr;
+                ostr<<*_FirstCur<<","<<*_SecCur;
+                return ostr.str();
             }
             iterator& operator++() {
                 ++_FirstCur;

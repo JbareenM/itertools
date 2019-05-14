@@ -8,6 +8,8 @@
 
 #ifndef product_hpp
 #define product_hpp
+#include<iostream>
+#include <sstream>
 
 namespace itertools{
     
@@ -26,8 +28,9 @@ namespace itertools{
         public:
             iterator(const typename T::iterator a,const typename T::iterator b,const typename E::iterator c,const typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecFirst(c),_SecCur(c),_EndSec(d){}
             auto operator*(){
-                std::cout<<*_FirstCur<<","<<*_SecCur;
-                return "";
+                std::ostringstream ostr;
+                ostr<<*_FirstCur<<","<<*_SecCur;
+                return ostr.str();
             }
             iterator& operator++() {
                 ++_SecCur;

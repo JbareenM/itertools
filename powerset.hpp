@@ -9,6 +9,7 @@
 #ifndef powerset_hpp
 #define powerset_hpp
 #include<iostream>
+#include<sstream>
 
 namespace itertools{
     template <typename T>
@@ -28,7 +29,9 @@ namespace itertools{
                 return *this;
             }
             auto &operator*() const{
-                return "";
+                std::ostringstream ostr;
+                ostr<<"";
+                return ostr.str();
             }
             bool operator!=(const Itr &rhs) const{
                 return _cur != rhs._cur;
