@@ -11,38 +11,34 @@
 
 namespace itertools{
     template <typename T>
-    class _range{
+    class range{
     private:
         T _begin;
         T _end;
     public:
-        _range(const T begin,const T end):_begin(begin),_end(end){}
+        range(const T begin,const T end):_begin(begin),_end(end){}
         //iterator_class________________________________________________________
-        class iterator{
+        class const_iterator{
         private:
             T _ItrCurrent;
         public:
-            iterator(T itr):_ItrCurrent(itr){}
+            const_iterator(T itr):_ItrCurrent(itr){}
             T operator*() const{ return _ItrCurrent; }
-            iterator &operator++(){
+            const_iterator &operator++(){
                 ++_ItrCurrent;
                 return *this;
             }
-            const iterator operator++(int){
-                iterator tmp = *this;
+            const const_iterator operator++(int){
+                const_iterator tmp = *this;
                 _ItrCurrent++;
                 return tmp;
             }
-            bool operator==(const iterator &a) const { return _ItrCurrent == a._ItrCurrent; }
-            bool operator!=(const iterator &a) const { return _ItrCurrent != a._ItrCurrent; }
+            bool operator==(const const_iterator &a) const { return _ItrCurrent == a._ItrCurrent; }
+            bool operator!=(const const_iterator &a) const { return _ItrCurrent != a._ItrCurrent; }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        iterator begin() const{return iterator(_begin);}
-        iterator end() const{return iterator(_end);}
+        const_iterator begin() const{return const_iterator(_begin);}
+        const_iterator end() const{return const_iterator(_end);}
     };
-    template <typename IT>
-    _range<IT> range(IT begin, IT end){
-        return _range<IT>(begin, end);
-    }
 }
 #endif /* range_hpp */

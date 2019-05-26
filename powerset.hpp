@@ -13,18 +13,18 @@
 
 namespace itertools{
     template <typename T>
-    class _powerset{
+    class powerset{
     private:
         T _set;
     public:
-        _powerset(const T s1):_set(s1){}
+        powerset(const T s1):_set(s1){}
         //iterator_class________________________________________________________
-        class iterator{
+        class _iterator{
         private:
-            typename T::iterator _cur;
+            typename T::_iterator _cur;
         public:
-            iterator(const typename T::iterator cur):_cur(cur){}
-            iterator &operator++(){
+            _iterator(const typename T::_iterator cur):_cur(cur){}
+            _iterator &operator++(){
                 _cur++;
                 return *this;
             }
@@ -33,18 +33,14 @@ namespace itertools{
                 ostr<<"";
                 return ostr.str();
             }
-            bool operator!=(const iterator &rhs) const{
+            bool operator!=(const _iterator &rhs) const{
                 return _cur != rhs._cur;
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        const auto begin(){return (_set.begin());}
-        const auto end(){return (_set.end());}
+        auto begin() const{return (_set.begin());}
+        auto end() const{return (_set.end());}
     };
-    template <typename IT>
-    _powerset<IT> powerset(IT a){
-        return _powerset<IT>(a);
-    }
 }
 
 #endif /* powerset_hpp */

@@ -14,53 +14,49 @@
 namespace itertools{
     
     template<typename T, typename E>
-    class _zip{
+    class zip{
     private:
         T _First;
         E _Second;
     public:
-        _zip(const T first, const E second):_First(first),_Second(second){}
+        zip(const T first, const E second):_First(first),_Second(second){}
         //iterator_class________________________________________________________
-        class iterator {
+        class const_iterator {
         private:
-            typename T::iterator _FirstCur,_EndFirst;
-            typename E::iterator _SecCur,_EndSec;
+            typename T::const_iterator _FirstCur,_EndFirst;
+            typename E::const_iterator _SecCur,_EndSec;
         public:
-            iterator(typename T::iterator a, typename T::iterator b, typename E::iterator c,typename E::iterator d):_FirstCur(a),_EndFirst(b),_SecCur(c),_EndSec(d){}
+            const_iterator(typename T::const_iterator a, typename T::const_iterator b, typename E::const_iterator c,typename E::const_iterator d):_FirstCur(a),_EndFirst(b),_SecCur(c),_EndSec(d){}
             
             auto operator*() const{
                 std::ostringstream ostr;
                 ostr<<*_FirstCur<<","<<*_SecCur;
                 return ostr.str();
             }
-            iterator& operator++() {
+            const_iterator& operator++() {
                 ++_FirstCur;
                 ++_SecCur;
                 return *this;
             }
-            const iterator operator++(int) {
-                iterator tmp= *this;
-                iterator::operator++();
+            const const_iterator operator++(int) {
+                const_iterator tmp= *this;
+                const_iterator::operator++();
                 return tmp;
             }
-            bool operator==(const iterator& rhs) const {
+            bool operator==(const const_iterator& rhs) const {
                 return _FirstCur == rhs._FirstCur && _SecCur == rhs._SecCur;
             }
-            bool operator!=(const iterator& rhs) const {
+            bool operator!=(const const_iterator& rhs) const {
                 return !(*this==rhs);
             }//iterator_class________________________________________________________
             //_____________________________________________________
         };
-        const iterator begin(){
-            return iterator(_First.begin(), _First.end(), _Second.begin(), _Second.end());
+        const_iterator begin() const{
+            return const_iterator(_First.begin(), _First.end(), _Second.begin(), _Second.end());
         };
-        const iterator end(){
-            return iterator(_First.end(), _First.end(), _Second.end(), _Second.end());
+        const_iterator end() const{
+            return const_iterator(_First.end(), _First.end(), _Second.end(), _Second.end());
         }
     };
-    template <typename IT, typename IE>
-    _zip<IT, IE> zip(IT a, IE b){
-        return _zip<IT, IE>(a, b);
-    }
 }
 #endif /* zip_hpp */

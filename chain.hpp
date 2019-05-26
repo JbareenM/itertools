@@ -12,54 +12,50 @@
 namespace itertools{
     
     template <typename T, typename E>
-    class _chain{
+    class chain{
     private:
         T _First;
         E _Second;
     public:
-        _chain(const T first,const E second) : _First(first), _Second(second){}
-
-        class iterator{
+        chain(const T first,const E second) : _First(first), _Second(second){}
+        
+        class const_iterator{
         private:
-            typename T::iterator _ItrFirst,_FirstEnd;
-            typename E::iterator _ItrSecond;
+            typename T::const_iterator _ItrFirst,_FirstEnd;
+            typename E::const_iterator _ItrSecond;
         public:
-            iterator(const typename T::iterator &first,const typename T::iterator end,const typename E::iterator &second):_ItrFirst(first),_FirstEnd(end),_ItrSecond(second){}
-            const auto operator*(){
+            const_iterator(const typename T::const_iterator &first,const typename T::const_iterator end,const typename E::const_iterator &second):_ItrFirst(first),_FirstEnd(end),_ItrSecond(second){}
+            const auto operator*() const{
                 if (_ItrFirst != _FirstEnd)
                     return *_ItrFirst;
                 return *_ItrSecond;
             }
-            iterator &operator++(){
+            const_iterator &operator++(){
                 if (_ItrFirst != _FirstEnd)
                     ++_ItrFirst;
                 else
                     ++_ItrSecond;
                 return *this;
             }
-            const iterator operator++(int) {
-                iterator tmp= *this;
-                iterator::operator++();
+            const const_iterator operator++(int) {
+                const_iterator tmp= *this;
+                const_iterator::operator++();
                 return tmp;
             }
-            bool operator==(const iterator& a) const {
+            bool operator==(const const_iterator& a) const {
                 return (_ItrFirst == a._ItrFirst && this->_ItrSecond == a._ItrSecond);
             }
-            bool operator!=(const iterator &a) const{
+            bool operator!=(const const_iterator &a) const{
                 return !(*this==a);
             }
         };//iterator_class________________________________________________________
         //_____________________________________________________
-        const iterator begin() {
-            return iterator(_First.begin(),_First.end(),_Second.begin());
+        const_iterator begin() const{
+            return const_iterator(_First.begin(),_First.end(),_Second.begin());
         }
-        const iterator end(){
-            return iterator(_First.end(),_First.end(),_Second.end());
+        const_iterator end() const{
+            return const_iterator(_First.end(),_First.end(),_Second.end());
         }
     };
-    template <typename IT, typename IE>
-    _chain<IT, IE> chain(IT start1, IE start2){
-        return _chain<IT, IE>(start1, start2);
-    }
 }
 #endif /* chain_hpp */
